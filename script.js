@@ -61,6 +61,11 @@ let slowMoTimer  = null;
 
 let playerName = '';
 
+const BGM_FILE_PATH = 'the_mountain-instrumental-513154.mp3';
+const BGM_VOLUME = 0.12;
+const SFX_VOLUME_MULTIPLIER = 1.35;
+let bgMusic = null;
+
 /* ══════════════════════════════════════════════
    CONFIGURATION DES NIVEAUX
    ══════════════════════════════════════════════ */
@@ -89,6 +94,9 @@ function initAudio() {
   if (!audioCtx) {
     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   }
+  if (audioCtx.state === 'suspended') {
+    audioCtx.resume();
+  }
 }
 
 function playTone(freq, type, dur, vol = 0.3, delay = 0) {
@@ -100,10 +108,31 @@ function playTone(freq, type, dur, vol = 0.3, delay = 0) {
   gain.connect(audioCtx.destination);
   osc.type = type;
   osc.frequency.setValueAtTime(freq, now);
-  gain.gain.setValueAtTime(vol, now);
+  const boostedVol = Math.min(vol * SFX_VOLUME_MULTIPLIER, 1);
+  gain.gain.setValueAtTime(boostedVol, now);
   gain.gain.exponentialRampToValueAtTime(0.001, now + dur);
   osc.start(now);
   osc.stop(now + dur);
+}
+
+function startBackgroundMusic() {
+  if (!bgMusic) {
+    bgMusic = new Audio(BGM_FILE_PATH);
+    bgMusic.loop = true;
+    bgMusic.preload = 'auto';
+  }
+
+  bgMusic.volume = BGM_VOLUME;
+  bgMusic.currentTime = 0;
+  bgMusic.play().catch(() => {
+    // Browser may block autoplay if no user interaction happened yet.
+  });
+}
+
+function stopBackgroundMusic() {
+  if (!bgMusic) return;
+  bgMusic.pause();
+  bgMusic.currentTime = 0;
 }
 
 function sndKill()  { playTone(880,'square',0.08,0.25); playTone(660,'square',0.12,0.2,0.06); }
@@ -856,6 +885,7 @@ function startTimer() {
    ══════════════════════════════════════════════ */
 function startGame() {
   initAudio();
+  startBackgroundMusic();
 
   score       = 0;
   lives       = 3;
@@ -906,6 +936,7 @@ function startGame() {
 
 function endGame() {
   gameRunning = false;
+  stopBackgroundMusic();
 
   clearInterval(spawnInterval);
   clearInterval(timerInterval);
