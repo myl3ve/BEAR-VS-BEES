@@ -20,9 +20,27 @@ function backToMenu() {
   makeClouds();
 }
 
-document.getElementById('pseudo-input').addEventListener('keydown', e => {
-  if (e.key === 'Enter') handlePlay();
-});
+function bindScreenEvents() {
+  const pseudoInput = document.getElementById('pseudo-input');
+  const playBtn = document.getElementById('play-btn');
+  const rulesBtn = document.getElementById('rules-btn');
+  const backFromRulesBtn = document.getElementById('back-from-rules-btn');
+  const replayBtn = document.getElementById('replay-btn');
+  const menuBtn = document.getElementById('menu-btn');
+
+  if (pseudoInput) {
+    pseudoInput.addEventListener('keydown', e => {
+      if (e.key === 'Enter') handlePlay();
+    });
+  }
+  if (playBtn) playBtn.addEventListener('click', handlePlay);
+  if (rulesBtn) rulesBtn.addEventListener('click', showRules);
+  if (backFromRulesBtn) backFromRulesBtn.addEventListener('click', hideRules);
+  if (replayBtn) replayBtn.addEventListener('click', startGame);
+  if (menuBtn) menuBtn.addEventListener('click', backToMenu);
+}
+
+bindScreenEvents();
 
 function activateSlowMo() {
   slowMoActive = true;

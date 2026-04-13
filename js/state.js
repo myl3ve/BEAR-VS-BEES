@@ -69,7 +69,7 @@ function getWaspChance(lvl) {
 const LEVEL_THRESHOLDS = [0, 150, 350, 600, 950, 1400, 1950, 2600, 3400, 4350, 5500];
 
 const LEVEL_MESSAGES = [
-  '', 'Ca commence !', "Elles s'enervent", 'Les guepes arrivent',
+  '', 'Ca commence !', "Elles s'énervent", 'Les guêpes arrivent',
   'Invasion !', 'La Reine approche...', 'Orage en vue',
-  'Legendaire !', 'Sans pitie...', "T'es encore la ?!", 'IMPOSSIBLE !!!'
+  'Légendaire !', 'Sans pitié...', "T'es encore là ?!", 'IMPOSSIBLE !!!'
 ];

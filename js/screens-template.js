@@ -12,8 +12,8 @@
         <input class="pseudo-input" id="pseudo-input" type="text" maxlength="18"
                placeholder="Entre ton prénom…" autocomplete="off" spellcheck="false"/>
         <div class="menu-btns">
-          <button class="btn" onclick="handlePlay()">🍯 JOUER !</button>
-          <button class="btn secondary" onclick="showRules()">📖 Règles du jeu</button>
+          <button class="btn" id="play-btn">🍯 JOUER !</button>
+          <button class="btn secondary" id="rules-btn">📖 Règles du jeu</button>
         </div>
       </div>
     </div>
@@ -44,7 +44,7 @@
           <div class="rules-tip"><span class="tip-icon">👑</span><span>Niveau 5 : La <b>Reine</b> peut surgir !</span></div>
           <div class="rules-tip"><span class="tip-icon">⛈️</span><span>Niveau 6 : <b>Tempête</b> — ciel sombre et éclairs !</span></div>
         </div>
-        <button class="btn secondary" onclick="hideRules()" style="margin-top:4px">← Retour au menu</button>
+        <button class="btn secondary" id="back-from-rules-btn" style="margin-top:4px">← Retour au menu</button>
       </div>
     </div>
 
@@ -55,8 +55,8 @@
         <div id="final-score">0 pts</div>
         <div id="final-stats"></div>
         <div class="go-btns">
-          <button class="btn" onclick="startGame()">🐻 REJOUER !</button>
-          <button class="btn menu-back" onclick="backToMenu()">🏠 Menu principal</button>
+          <button class="btn" id="replay-btn">🐻 REJOUER !</button>
+          <button class="btn menu-back" id="menu-btn">🏠 Menu principal</button>
         </div>
       </div>
     </div>
