@@ -36,7 +36,7 @@ function bindScreenEvents() {
   if (playBtn) playBtn.addEventListener('click', handlePlay);
   if (rulesBtn) rulesBtn.addEventListener('click', showRules);
   if (backFromRulesBtn) backFromRulesBtn.addEventListener('click', hideRules);
-  if (replayBtn) replayBtn.addEventListener('click', startGame);
+  if (replayBtn) replayBtn.addEventListener('click', () => startGame());
   if (menuBtn) menuBtn.addEventListener('click', backToMenu);
 }
 
