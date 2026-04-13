@@ -1,0 +1,19 @@
+<svg viewBox="0 0 88 88" xmlns="http://www.w3.org/2000/svg">
+  <ellipse cx="44" cy="52" rx="30" ry="26" fill="#8B4513"/>
+  <ellipse cx="44" cy="50" rx="27" ry="23" fill="#C4821A"/>
+  <polygon points="35,44 39,38 47,38 51,44 47,50 39,50" fill="#F5A623" stroke="#8B4513" stroke-width="1.2" opacity="0.9"/>
+  <polygon points="22,44 26,38 34,38 38,44 34,50 26,50" fill="#F5A623" stroke="#8B4513" stroke-width="1.2" opacity="0.85"/>
+  <polygon points="48,44 52,38 60,38 64,44 60,50 52,50" fill="#F5A623" stroke="#8B4513" stroke-width="1.2" opacity="0.85"/>
+  <polygon points="28,57 32,51 40,51 44,57 40,63 32,63" fill="#FFD700" stroke="#8B4513" stroke-width="1.2" opacity="0.8"/>
+  <polygon points="44,57 48,51 56,51 60,57 56,63 48,63" fill="#FFD700" stroke="#8B4513" stroke-width="1.2" opacity="0.8"/>
+  <polygon points="28,31 32,25 40,25 44,31 40,37 32,37" fill="#F5C518" stroke="#8B4513" stroke-width="1.2" opacity="0.75"/>
+  <polygon points="44,31 48,25 56,25 60,31 56,37 48,37" fill="#F5C518" stroke="#8B4513" stroke-width="1.2" opacity="0.75"/>
+  <ellipse cx="44" cy="68" rx="10" ry="6" fill="#3A1A00"/>
+  <ellipse cx="44" cy="67" rx="7" ry="4" fill="#2A0F00"/>
+  <path d="M44 14 Q44 6 52 4" stroke="#5A3A1A" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <circle cx="52" cy="4" r="3" fill="#5A3A1A"/>
+  <circle cx="58" cy="30" r="4" fill="#F5C518"/>
+  <ellipse cx="55" cy="27" rx="5" ry="3" fill="rgba(200,230,255,.7)"/>
+  <ellipse cx="61" cy="27" rx="5" ry="3" fill="rgba(200,230,255,.7)"/>
+  <text x="44" y="22" text-anchor="middle" font-size="10">⚠️</text>
+</svg>
