@@ -1,0 +1,116 @@
+# Bear vs Bees `v1.0.1-beta.1`
+
+Bear vs Bees is a browser-based survival arcade game developed for a game jam. The player must keep the bear alive while facing increasingly dangerous enemies, traps, and score-driven difficulty.
+
+## Overview
+
+The game follows a simple and readable survival loop:
+
+- eliminate enemies to earn points
+- avoid traps and incoming damage
+- collect power-ups at the right moment
+- survive as long as possible while the difficulty increases with score
+
+## Gameplay
+
+The player controls the game with the mouse. Clicking enemies removes them and awards points. The longer the run lasts, the more intense the game becomes.
+
+Main threats and systems:
+
+- bees, wasps, and queen enemies
+- hive trap that damages the player
+- shield power-up
+- slow-motion power-up
+- combo-based scoring
+
+## Difficulty and Progression
+
+The game is score-driven, not level-driven in the HUD.
+
+Difficulty increases automatically as the score rises:
+
+- 350 points: wasps start appearing
+- 950 points: the queen can spawn
+- 1400 points: storm ambiance and lightning effects are activated
+
+This approach keeps the game easy to understand for the player while still creating a strong difficulty curve.
+
+## Win / Lose Conditions
+
+The game ends when:
+
+- all hearts are lost
+- the survival timer reaches zero
+
+## Features
+
+- survival arcade gameplay
+- score and combo system
+- progressive difficulty based on score
+- enemy variety and trap mechanics
+- power-ups with tactical use
+- dynamic storm ambiance
+- background music and sound effects
+- modular front-end structure
+
+## Technical Stack
+
+- HTML5
+- CSS3
+- Vanilla JavaScript
+
+## Project Structure
+
+```text
+BEAR-VS-BEES/
+├─ index.html
+├─ README
+├─ css/
+│  ├─ base.css
+│  ├─ ui.css
+│  └─ screens.css
+├─ js/
+│  ├─ state.js
+│  ├─ audio.js
+│  ├─ assets.js
+│  ├─ environment.js
+│  ├─ screens-template.js
+│  ├─ ui.js
+│  └─ game.js
+└─ assets/
+   ├─ audio/
+   │  └─ the_mountain-instrumental-513154.mp3
+   └─ svg/
+      ├─ bear.svg
+      ├─ bee.svg
+      ├─ wasp.svg
+      ├─ queen.svg
+      ├─ hive.svg
+      ├─ honey-pot.svg
+      └─ chrono.svg
+```
+
+## How to Run
+
+### Recommended: VS Code Live Server
+
+1. Open the project folder in VS Code.
+2. Install the Live Server extension.
+3. Right-click on `index.html` and choose Open with Live Server.
+
+### Simple local test
+
+1. Open `index.html` directly in a browser.
+2. The game will run without any build step.
+
+### Play on itch.io
+
+You can also play the game on itch.io by searching for **Bear Versus Bees**.
+
+## Controls
+
+- Mouse click: eliminate enemies and collect power-ups
+
+## Status
+
+The project is playable and organized into modular JavaScript, CSS, and asset files.
