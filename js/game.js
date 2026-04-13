@@ -1,9 +1,10 @@
 function spawnBee(forceQueen = false) {
   if (!gameRunning) return;
-  if (document.querySelectorAll('.bee:not(.dying)').length >= getMaxEnemies(level)) return;
+  const tier = getDifficultyTierByScore(score);
+  if (document.querySelectorAll('.bee:not(.dying)').length >= getMaxEnemies(tier)) return;
 
-  const isQueen = forceQueen || (!queenAlive && level >= 5 && Math.random() < 0.07);
-  const isWasp  = !isQueen && Math.random() < getWaspChance(level);
+  const isQueen = forceQueen || (!queenAlive && score >= QUEEN_SCORE_THRESHOLD && Math.random() < 0.07);
+  const isWasp  = !isQueen && score >= WASP_SCORE_THRESHOLD && Math.random() < getWaspChance(tier);
 
   const bee = document.createElement('div');
   if (isQueen)     { bee.className = 'bee queen';  bee.innerHTML = queenSVG(); queenAlive = true; }
@@ -23,7 +24,7 @@ function spawnBee(forceQueen = false) {
   const bearCenterY = window.innerHeight - 210;
   const angle       = Math.atan2(bearCenterY - startY, bearCenterX - startX);
 
-  let baseSpeed = getSpeed(level);
+  let baseSpeed = getSpeed(tier);
   if (isWasp)  baseSpeed *= 1.5;
   if (isQueen) baseSpeed *= 0.7;
 
@@ -417,7 +418,9 @@ function showNotif(txt) {
    ÉCLAIRS
    ══════════════════════════════════════════════ */
 function spawnLightning() {
-  if (!gameRunning || level < 6) return;
+  if (!gameRunning || score < STORM_SCORE_THRESHOLD) return;
+
+  const tier = getDifficultyTierByScore(score);
 
   const count = 1 + Math.floor(Math.random() * 3);
   for (let i = 0; i < count; i++) {
@@ -434,19 +437,19 @@ function spawnLightning() {
     }, i * 200 + Math.random() * 300);
   }
 
-  const delay = level >= 8 ? 1500 + Math.random() * 2000 : 3000 + Math.random() * 4000;
+  const delay = tier >= 8 ? 1500 + Math.random() * 2000 : 3000 + Math.random() * 4000;
   lightningTimeout = setTimeout(spawnLightning, delay);
 }
 
 /* ══════════════════════════════════════════════
-   SCORE ET NIVEAUX
+   SCORE ET DIFFICULTE
    ══════════════════════════════════════════════ */
 function addScore(pts) {
   score += pts;
   scoreEl.textContent = Math.floor(score);
   scoreEl.style.transform = 'scale(1.4)';
   setTimeout(() => { scoreEl.style.transform = ''; }, 190);
-  checkLevel();
+  updateDifficultyFromScore();
 }
 
 function loseHeart() {
@@ -467,29 +470,21 @@ function showMsg(x, y, txt, col) {
   m.addEventListener('animationend', () => m.remove());
 }
 
-function checkLevel() {
-  const newLevel = LEVEL_THRESHOLDS.filter(t => score >= t).length;
-
-  if (newLevel > level) {
-    level = newLevel;
-    levelEl.textContent = level;
-    scorePerBee = 10 + level * 5;
-
-    bannerText.textContent = `Niveau ${level} !`;
-    bannerSub.textContent  = LEVEL_MESSAGES[Math.min(level, LEVEL_MESSAGES.length - 1)];
-    levelBanner.classList.remove('show');
-    void levelBanner.offsetWidth;
-    levelBanner.classList.add('show');
-    levelBanner.addEventListener('animationend', () => levelBanner.classList.remove('show'), { once: true });
+function updateDifficultyFromScore() {
+  const newTier = getDifficultyTierByScore(score);
+  if (newTier > difficultyTier) {
+    difficultyTier = newTier;
+    scorePerBee = 10 + difficultyTier * 5;
 
     clearInterval(spawnInterval);
-    spawnInterval = setInterval(spawnBee, getSpawnDelay(level));
+    spawnInterval = setInterval(spawnBee, getSpawnDelay(difficultyTier));
     sndLevel();
+  }
 
-    if (level === 6) {
-      bg.classList.add('storm');
-      setTimeout(spawnLightning, 500);
-    }
+  if (!stormStarted && score >= STORM_SCORE_THRESHOLD) {
+    stormStarted = true;
+    bg.classList.add('storm');
+    setTimeout(spawnLightning, 500);
   }
 }
 
@@ -513,7 +508,7 @@ function startTimer() {
 
     score += 1;
     scoreEl.textContent = Math.floor(score);
-    checkLevel();
+    updateDifficultyFromScore();
 
     if (gameTimer <= 0) endGame();
   }, 100);
@@ -528,8 +523,9 @@ function startGame() {
 
   score       = 0;
   lives       = 3;
-  level       = 1;
   scorePerBee = 10;
+  difficultyTier = 1;
+  stormStarted = false;
   queenAlive  = false;
   shielded    = false;
   slowMoActive = false;
@@ -540,7 +536,6 @@ function startGame() {
   maxCombo     = 0;
 
   scoreEl.textContent = '0';
-  levelEl.textContent = '1';
   hearts.forEach(h => h.classList.remove('lost', 'losing', 'gaining'));
   shieldBubble.style.display = 'none';
   shieldHud.style.display    = 'none';
@@ -565,7 +560,7 @@ function startGame() {
 
   gameRunning = true;
   setTimeout(spawnBee, 400);
-  spawnInterval = setInterval(spawnBee, getSpawnDelay(level));
+  spawnInterval = setInterval(spawnBee, getSpawnDelay(difficultyTier));
   startTimer();
 
   honeyPotTimeout = setTimeout(spawnHoneyPot, 10000 + Math.random() * 5000);
@@ -594,7 +589,6 @@ function endGame() {
   document.getElementById('final-pseudo').textContent = playerName ? `🐻 Bravo ${playerName} !` : '';
   document.getElementById('final-score').textContent  = Math.floor(score) + ' pts';
   document.getElementById('final-stats').innerHTML =
-    `Niveau atteint : <b>${level}</b><br>` +
     `Ennemis éliminés : <b>${totalKills}</b><br>` +
     `Guêpes vaincues : <b>${totalWasps} 🟡</b><br>` +
     (totalQueens ? `Reines vaincues : <b>${totalQueens} 👑</b><br>` : '') +

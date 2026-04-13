@@ -39,10 +39,10 @@
           <div class="rules-tip"><span class="tip-icon">❤️</span><span>Tu as <b>3 vies</b>. Une abeille qui touche l'ours = -1 vie.</span></div>
         </div>
         <div class="rules-section">
-          <h3>⚡ Niveaux spéciaux</h3>
-          <div class="rules-tip"><span class="tip-icon">🐝</span><span>Niveau 3 : Les <b>guêpes</b> arrivent !</span></div>
-          <div class="rules-tip"><span class="tip-icon">👑</span><span>Niveau 5 : La <b>Reine</b> peut surgir !</span></div>
-          <div class="rules-tip"><span class="tip-icon">⛈️</span><span>Niveau 6 : <b>Tempête</b> — ciel sombre et éclairs !</span></div>
+          <h3>⚡ Paliers de score</h3>
+          <div class="rules-tip"><span class="tip-icon">🐝</span><span>A <b>350 pts</b> : Les guêpes arrivent !</span></div>
+          <div class="rules-tip"><span class="tip-icon">👑</span><span>A <b>950 pts</b> : La Reine peut surgir !</span></div>
+          <div class="rules-tip"><span class="tip-icon">⛈️</span><span>A <b>1400 pts</b> : Tempête, ciel sombre et éclairs !</span></div>
         </div>
         <button class="btn secondary" id="back-from-rules-btn" style="margin-top:4px">← Retour au menu</button>
       </div>
