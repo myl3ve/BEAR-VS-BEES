@@ -262,7 +262,7 @@
 /* Timer */
 #timer-wrap {
   position: fixed;
-  bottom: 140px;
+  bottom: 56px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 50;
