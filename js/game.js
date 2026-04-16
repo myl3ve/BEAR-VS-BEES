@@ -275,15 +275,29 @@ function spawnHoneyPot() {
     e.stopPropagation();
     initAudio();
     pot.classList.add('collecting');
-    sndHoney();
     const cx = parseFloat(pot.style.left);
     const cy = parseFloat(pot.style.top) || 150;
 
-    if (!shielded && (lives >= 3 || Math.random() < 0.4)) {
+    // "Nothing is Safe" : 15% de chance que le pot soit maudit
+    const isCursed = Math.random() < 0.25;
+
+    if (isCursed) {
+      // Pot maudit : fait perdre une vie
+      sndHurt();
+      showMsg(cx, cy, '💀 MAUDIT !', '#FF0000');
+      showNotif('💀 Pot maudit ! -1 vie !');
+      loseHeart();
+      bear.classList.remove('hurt');
+      void bear.offsetWidth;
+      bear.classList.add('hurt');
+      bear.addEventListener('animationend', () => bear.classList.remove('hurt'), { once: true });
+    } else if (!shielded && (lives >= 3 || Math.random() < 0.4)) {
+      sndHoney();
       activateShield();
       showMsg(cx, cy, '🛡️ BOUCLIER !', '#00BFFF');
       showNotif('🛡️ Bouclier activé ! (5 sec)');
     } else {
+      sndHoney();
       gainHeart();
       showMsg(cx, cy, '❤️ +1 VIE !', '#FF69B4');
       showNotif('❤️ Vie récupérée !');
