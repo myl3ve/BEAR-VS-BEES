@@ -25,6 +25,9 @@
   width: 100%;
   box-shadow: 0 0 80px rgba(245,166,35,.35), 0 30px 60px rgba(0,0,0,.55);
   animation: cardIn .7s cubic-bezier(.22,1,.36,1) forwards;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 @keyframes cardIn {
   0%   { transform: translateY(60px) scale(.85); opacity: 0; }
@@ -33,9 +36,10 @@
 
 .bear-icon {
   font-size: 5rem;
-  display: inline-block;
+  display: block;
   animation: bearBob 1.3s ease-in-out infinite;
   margin-bottom: 4px;
+  margin-left: 65px;
 }
 .menu-title {
   font-family: 'Baloo 2', cursive;
